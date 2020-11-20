@@ -1,24 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GuiMiGooo.ViewModels"
              x:Class="GuiMiGooo.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to GuiMiGomma 2 Coq e Joel!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start using GuiMiGomma" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Big Up" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Welcome 2 my CI/CD for Mobile App"/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height=".4*"/>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <!--<ColumnDefinition Width="*"/>-->
+        </Grid.ColumnDefinitions>
+
+
+
+        <Image Source="icon_GuiMigooo" Background="white" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+        <Editor Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Enter a note here" Margin="10,10" Text="{Binding TheNote}" />
+
+        <Button  Grid.Row="2" Grid.Column="0" Text="Save" BackgroundColor="Green" Command="{Binding SaveCommand}"/>
+        <Button  Grid.Row="2" Grid.Column="1" Text="Erase" BackgroundColor="Red" Command="{Binding EraseCommand}"/>
+
+        <CollectionView ItemsSource="{Binding AllNotes}" Grid.Row="3" Grid.ColumnSpan="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame BackgroundColor="BlanchedAlmond">
+                            <Label Text="{Binding .}" TextColor="White" />
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </Grid>
 
 </ContentPage>
