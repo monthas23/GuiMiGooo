@@ -34,7 +34,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
-                        <Frame BackgroundColor="BlanchedAlmond">
+                        <Frame BackgroundColor="Black">
                             <Label Text="{Binding .}" TextColor="White" />
                         </Frame>
                     </StackLayout>
