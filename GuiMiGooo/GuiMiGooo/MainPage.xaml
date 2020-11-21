@@ -25,12 +25,16 @@
 
 
         <Image Source="icon_GuiMigooo" Background="white" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
-        <Editor Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Enter a note here" Margin="10,10" Text="{Binding TheNote}" />
+        <Editor Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Enter your name here" Margin="10,10" Text="{Binding TheNote}" />
 
         <Button  Grid.Row="2" Grid.Column="0" Text="Save" BackgroundColor="Green" Command="{Binding SaveCommand}"/>
         <Button  Grid.Row="2" Grid.Column="1" Text="Erase" BackgroundColor="Red" Command="{Binding EraseCommand}"/>
 
-        <CollectionView ItemsSource="{Binding AllNotes}" Grid.Row="3" Grid.ColumnSpan="2">
+        <CollectionView ItemsSource="{Binding AllNotes}" Grid.Row="3" Grid.ColumnSpan="2"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedNote}"
+                        SelectionChangedCommand="{Binding SelectedNoteChangedCommand}}"
+                        >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>

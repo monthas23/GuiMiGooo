@@ -14,6 +14,19 @@ namespace GuiMiGooo.ViewModels
         {
             AllNotes = new ObservableCollection<string>();
 
+            SelectedNoteChangedCommand = new Command(async () =>
+
+            {
+                var detailVM = new DetalPageViewModel(SelectedNote);
+
+                var detailPage = new DetailPage();
+
+                detailPage.BindingContext = detailVM;
+
+                await Application.Current.MainPage.Navigation.PushModalAsync(detailPage);
+            
+            });
+
             EraseCommand = new Command(() =>
             {
                 if (AllNotes.Contains(TheNote))
@@ -55,8 +68,27 @@ namespace GuiMiGooo.ViewModels
             }
         }
 
+        string selectedNote;
+
+        public string SelectedNote
+        {
+
+            get => selectedNote;
+            set
+            {
+                selectedNote = value;
+
+                var args = new PropertyChangedEventArgs(nameof(TheNote));
+
+                PropertyChanged?.Invoke(this, args);
+            }
+        }
+
         public Command SaveCommand { get; }
         public Command EraseCommand { get; }
+
+        public Command SelectedNoteChangedCommand { get; }
+        
 
 
     }
