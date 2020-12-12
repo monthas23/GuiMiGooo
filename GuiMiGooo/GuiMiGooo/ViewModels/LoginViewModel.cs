@@ -9,7 +9,7 @@ namespace GuiMiGooo.ViewModels
 {
     public class LoginViewModel
     {
-        ApiServices _apiServices = new ApiServices();
+        //ApiServices _apiServices = new ApiServices();
 
         public string Email { get; set; }
         public string Password { get; set; }
@@ -23,12 +23,17 @@ namespace GuiMiGooo.ViewModels
 
             get
             {
+               
                 return new Command( async () =>
                 {
-                    var isSuccess = await _apiServices.RegisterAsync(Email, Password, Username, PhoneNumber, CompagnyCode);
+                    ApiServices _apTemp = new ApiServices();
+                    var isSuccess = await _apTemp.RegisterAsync(Email, Password, Username, PhoneNumber, CompagnyCode);
+                    
 
-                    if (isSuccess)
-                        Message = Username + " has been successfully registered on GuiMiGomma";
+                    if (isSuccess) {
+                     
+                    Message = Username + " has been successfully registered on GuiMiGomma";
+                }
                     else
                         Message = "Unfortunetly, somthing went wrong during ur registration " + Username;
                 

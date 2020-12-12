@@ -36,7 +36,7 @@
 
 
 
-        <Label Text="Welcome to Xamarin.Forms!"
+        <Label Text="kkkkkk" TextColor="White"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
     </StackLayout>
