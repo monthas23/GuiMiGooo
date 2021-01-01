@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
 
 namespace GuiMiGooo.Droid
 {
@@ -14,6 +15,7 @@ namespace GuiMiGooo.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

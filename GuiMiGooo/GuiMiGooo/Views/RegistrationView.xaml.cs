@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace GuiMiGooo
+namespace GuiMiGooo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DetailPage : ContentPage
+    public partial class RegistrationView : ContentPage
     {
-        public DetailPage()
+        public RegistrationView()
         {
             InitializeComponent();
         }

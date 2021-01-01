@@ -1,10 +1,11 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using IdentityModel.Client;
-// using IdentityModel.Client;
+﻿using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GuiMiGooo.Services
 {
@@ -19,7 +20,7 @@ namespace GuiMiGooo.Services
             _logger = logger;
             _identityServerSettings = identityServerSettings;
 
-             var httpClient = new HttpClient();
+            var httpClient = new HttpClient();
             _discoveryDocument = httpClient.GetDiscoveryDocumentAsync(identityServerSettings.Value.DiscoveryUrl).Result;
             if (_discoveryDocument.IsError)
             {

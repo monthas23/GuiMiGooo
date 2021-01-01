@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace GuiMiGooo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class UserItem : ContentView
     {
-        public LoginPage()
+        public UserItem()
         {
             InitializeComponent();
         }
