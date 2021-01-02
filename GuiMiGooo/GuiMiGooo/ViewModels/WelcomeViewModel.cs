@@ -15,7 +15,6 @@ namespace GuiMiGooo.ViewModels
         public Command RegisterCommand { get; private set; }
         public Command TokenCommand { get; private set; }
         private Command backProva { get; set; }
-
         public WelcomeViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);

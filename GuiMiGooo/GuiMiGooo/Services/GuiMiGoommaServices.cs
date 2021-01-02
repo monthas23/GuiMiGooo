@@ -14,10 +14,16 @@ namespace GuiMiGooo.Services
 {
     public class GuiMiGoommaServices
     {
+        //public GuiMiGoommaServices(ILogger<TokenService> _logger)
+        //{
+        //    this.logger = _logger;
+        //}
 
-        private readonly ILogger<TokenService> _logger;
+
+        private readonly ILogger<TokenService> logger;
         private readonly IOptions<IdentityServerSettings> _identityServerSettings;
         private readonly DiscoveryDocumentResponse _discoveryDocument;
+        private readonly HttpClient _client;
 
         public async Task<TokenResponse> GetToken(string scope = "scope1")
         {
@@ -37,7 +43,7 @@ namespace GuiMiGooo.Services
 
             if (tokenResponse.IsError)
             {
-                _logger.LogError($"Unable to get token. Error is: {tokenResponse.Error}");
+                //logger.LogError($"Unable to get token. Error is: {tokenResponse.Error}");
                 throw new Exception("Unable to get token", tokenResponse.Exception);
             }
 
@@ -45,7 +51,7 @@ namespace GuiMiGooo.Services
         }
         public async Task<HttpResponseMessage> GetToken()
         {
-            using var client = new HttpClient();
+            var client = new HttpClient();
             HttpContent MyContent = null;
 
             var values = new Dictionary<string, string>
@@ -65,7 +71,7 @@ namespace GuiMiGooo.Services
 
             if (!tokenResponse.IsSuccessStatusCode)
             {
-                _logger.LogError($"Unable to get token. Error is: {tokenResponse.ReasonPhrase}");
+                //logger.LogError($"Unable to get token. Error is: {tokenResponse.ReasonPhrase}");
                 throw new Exception("Unable to get token", null);
             }
 
@@ -73,7 +79,7 @@ namespace GuiMiGooo.Services
         }
         public async Task<bool> UserRegistration(string Username, string Password, string Email, List<CompagniesData> Operatori = null)
         {
-            using var client = new HttpClient();
+            var client = new HttpClient();
 
             var model = new NewGuiMiGommaUser()
             {
@@ -91,43 +97,64 @@ namespace GuiMiGooo.Services
         }
         public async Task<TokenResponse> GetAccessToken(string Username = "sdss", string Password = "pipPssdsdo@12020")
         {
-            HttpClient client = new HttpClient();
-            var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+            TokenResponse tokenResponse = new TokenResponse();
+
+            try
             {
-                Address = Settings.TokenEndpoint,
-                ClientId = Settings.ClientId,
-                ClientSecret = Settings.ClientSecret,
-                Scope = Settings.Scope,
-                UserName = Username,
-                Password = Password,
+                tokenResponse = await _client.RequestPasswordTokenAsync(new PasswordTokenRequest
+                {
+                    Address = Settings.TokenEndpoint,
+                    ClientId = Settings.ClientId,
+                    ClientSecret = Settings.ClientSecret,
+                    Scope = Settings.Scope,
+                    UserName = Username,
+                    Password = Password,
 
-            });
-
-
-            if (tokenResponse.IsError)
+                });
+            }
+            catch (Exception e)
             {
-                _logger.LogError($"Unable to get token. Error is: {tokenResponse.Error}");
+                //logger.LogError($"Unable to get token. Error is: {tokenResponse.Error}");
                 throw new Exception("Unable to get token", tokenResponse.Exception);
             }
 
             return tokenResponse;
         }
 
+        //public async Task<UserInfoResponseGuimiGomma> GetUserInfo(string Username = "sdss", string Password = "pipPssdsdo@12020")
         public async Task<UserInfoResponse> GetUserInfo(string Username = "sdss", string Password = "pipPssdsdo@12020")
         {
 
-            using var client = new HttpClient();
+            UserInfoResponse userInfoResult = new UserInfoResponse();
 
             var tk = await GetAccessToken(Username, Password);
 
-            var response = await client.GetUserInfoAsync(new UserInfoRequest
+            try
             {
-                Address = Settings.UserinfoEndpoint,
-                Token = tk.AccessToken
+                userInfoResult = await _client.GetUserInfoAsync(new UserInfoRequest
+                {
+                    Address = Settings.UserinfoEndpoint,
+                    Token = tk.AccessToken
 
-            });
+                });
+            }
+            catch (Exception e)
+            {
 
-            return response;
+                //logger.LogError($"Unable to get {Username} info from GuiMiGomma Identity Server 4. Error is: {e.StackTrace}");
+                //throw new Exception(e.Message);
+                //UserInfoResponseGuimiGomma UserInfError = new UserInfoResponseGuimiGomma() {
+                //    ErrorMessageGG =  e.Message,
+                //    ActualRespGG = userInfoResult.ActualRespGG
+                    
+                //};
+                //return UserInfError;
+
+                throw new Exception( e.Message);
+            }
+
+
+            return userInfoResult;
         }
     }
 }

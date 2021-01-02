@@ -35,29 +35,23 @@ namespace GuiMiGooo.ViewModels
 
                 var resp = await utilServices.GetUserInfo(Username, Password);
 
-                if (resp.Error != null)
-                {
-                    OutputText = resp.HttpErrorReason;
-                }
-                else
-                {
-                    var sb = new StringBuilder(128);
-                    foreach (var claim in resp.Claims)
-                    {
-                        sb.AppendFormat("{0}: {1}\n", claim.Type, claim.Value);
-                    }
 
-                    OutputText = sb.ToString();
+                var sb = new StringBuilder(128);
+
+                foreach (var claim in resp.Claims)
+                {
+                    sb.AppendFormat("{0}: {1}\n", claim.Type, claim.Value);
                 }
 
-                
+                OutputText = sb.ToString();
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                OutputText = e.Message;
 
-                throw;
             }
-            
+
         }
 
         internal Task Initialize()
@@ -71,7 +65,7 @@ namespace GuiMiGooo.ViewModels
                 await Navigation.NavigateTo("..");
             });
 
-        public Command backProva { get;  set; }
+        public Command backProva { get; set; }
         private async void backProvaComm(object obj)
         {
             await Navigation.NavigateTo($"//{nameof(WelcomeView)}");
