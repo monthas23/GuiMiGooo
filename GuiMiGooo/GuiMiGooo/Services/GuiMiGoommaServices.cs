@@ -115,7 +115,7 @@ namespace GuiMiGooo.Services
             catch (Exception e)
             {
                 //logger.LogError($"Unable to get token. Error is: {tokenResponse.Error}");
-                throw new Exception("Unable to get token", tokenResponse.Exception);
+                throw new Exception($"Unable to get Accesst token with : {Username}", tokenResponse.Exception);
             }
 
             return tokenResponse;
