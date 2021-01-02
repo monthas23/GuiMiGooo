@@ -25,6 +25,11 @@ namespace GuiMiGooo.Services
         private readonly DiscoveryDocumentResponse _discoveryDocument;
         private readonly HttpClient _client;
 
+        public GuiMiGoommaServices()
+        {
+            _client = new HttpClient();
+        }
+
         public async Task<TokenResponse> GetToken(string scope = "scope1")
         {
 
@@ -82,7 +87,7 @@ namespace GuiMiGooo.Services
         }
         public async Task<bool> UserRegistration(string Username, string Password, string Email, List<CompagniesData> Operatori = null)
         {
-            var client = new HttpClient();
+            //var client = new HttpClient();
 
             var model = new NewGuiMiGommaUser()
             {
@@ -96,7 +101,7 @@ namespace GuiMiGooo.Services
             HttpContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
             try
             {
-                httpResponse = await client.PostAsync(new Uri(Settings.RegistrationEndpoint), content);
+                httpResponse = await _client.PostAsync(new Uri(Settings.RegistrationEndpoint), content);
             }
             catch (Exception e)
             {
@@ -119,6 +124,7 @@ namespace GuiMiGooo.Services
                     Address = Settings.TokenEndpoint,
                     ClientId = Settings.ClientId,
                     ClientSecret = Settings.ClientSecret,
+                    //Scope = Settings.ScopeAccessToken,
                     Scope = Settings.Scope,
                     UserName = Username,
                     Password = Password,

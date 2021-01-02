@@ -61,5 +61,13 @@ namespace GuiMiGooo
                 return "scope1 openid email";
             }
         }
+
+        public static string ScopeAccessToken
+        {
+            get
+            {
+                return "scope1";
+            }
+        }
     }
 }
