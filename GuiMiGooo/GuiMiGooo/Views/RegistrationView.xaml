@@ -2,11 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Registration"
-             x:Class="GuiMiGooo.Views.RegistrationView">
+             x:Class="GuiMiGooo.Views.RegistrationView"
+             BackgroundColor="Black">
     <ContentPage.Content>
-        <Label Text="Enregistrement"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="Username" FontSize="Medium" />
+            <Entry Text="{Binding Username, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Password" FontSize="Medium" />
+            <Editor Text="{Binding Password, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <Label Text="Email" FontSize="Medium" />
+            <Entry Text="{Binding UserEmail, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Operateur" FontSize="Medium" />
+            <Entry Text="{Binding CompagnyCode, Mode=TwoWay}" FontSize="Medium" Placeholder="MTN, ORANGE o EXPRESSUNION"/>
+            <Label Text="Numero" FontSize="Medium" />
+            <Entry Text="{Binding PhoneNumber, Mode=TwoWay}" FontSize="Medium" Placeholder="MTN, ORANGE o EXPRESSUNION"/>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Register" Command="{Binding RegisterCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding RegistrationResult}"
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
     

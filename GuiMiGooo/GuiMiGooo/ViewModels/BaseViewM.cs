@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuiMiGooo.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -10,6 +11,6 @@ namespace GuiMiGooo.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public INavigate Navigation { get; set; } = new Navigator() ;
-
+        public  GuiMiGoommaServices utilServices;
     }
 }

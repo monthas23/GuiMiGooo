@@ -2,6 +2,7 @@
 using GuiMiGooo.Views;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -15,29 +16,34 @@ namespace GuiMiGooo.ViewModels
         public Command RegisterCommand { get; private set; }
         public Command TokenCommand { get; private set; }
         private Command backProva { get; set; }
-        public WelcomeViewModel()
+        public string OutputText { get; set; }
+        public WelcomeViewModel(GuiMiGoommaServices utilServices)
         {
             LoginCommand = new Command(OnLoginClicked);
             RegisterCommand = new Command(OnRegisterClicked);
 
             //TokenCommand
             TokenCommand = new Command(OnTokenCommandClicked);
+            this.utilServices = utilServices;
 
 
         }
 
         private async void OnTokenCommandClicked()
         {
-            GuiMiGoommaServices _UtilsService = new GuiMiGoommaServices();
+            var response = new HttpResponseMessage();
 
-            var response = await _UtilsService.GetUserInfo();
-            var sb = new StringBuilder(128);
-            foreach (var claim in response.Claims)
+            try
             {
-                sb.AppendFormat("{0}: {1}\n", claim.Type, claim.Value);
+                response = await utilServices.GetToken();
+            }
+            catch (Exception e)
+            {
+
+                OutputText = e.Message;
             }
 
-            string test = sb.ToString();
+            OutputText = await response.Content.ReadAsStringAsync(); ;
 
         }
 

@@ -56,23 +56,26 @@ namespace GuiMiGooo.Services
 
             var values = new Dictionary<string, string>
             {
-                {"client_id", "m2m2.client"},
+                {"client_id", "m2m.client"},
                 {"client_secret", "511536EF-F270-4058-80CA-1C89C192F69A"},
-                {"grant_type","password"},
-                {"scope", "scope1"},
-                {"UserName", "sdss"},
-                {"Password", "pipPssdsdo@12020"}
+                {"grant_type","client_credentials"},
+                {"scope", "scope1"}
+                //{"UserName", "sdss"},
+                //{"Password", "pipPssdsdo@12020"}
             };
 
             MyContent = new FormUrlEncodedContent(values);
 
-            var tokenResponse = await client.PostAsync(Settings.TokenEndpoint, MyContent);
-
-
-            if (!tokenResponse.IsSuccessStatusCode)
+            HttpResponseMessage tokenResponse = new HttpResponseMessage();
+            try
             {
-                //logger.LogError($"Unable to get token. Error is: {tokenResponse.ReasonPhrase}");
-                throw new Exception("Unable to get token", null);
+                tokenResponse = await client.PostAsync(Settings.TokenEndpoint, MyContent);
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
             }
 
             return tokenResponse;
@@ -88,10 +91,20 @@ namespace GuiMiGooo.Services
                 UserName = Username,
                 CompagniesData = Operatori
             };
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
 
             HttpContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            try
+            {
+                httpResponse = await client.PostAsync(new Uri(Settings.RegistrationEndpoint), content);
+            }
+            catch (Exception e)
+            {
 
-            HttpResponseMessage httpResponse = await client.PostAsync(new Uri(Settings.RegistrationEndpoint), content);
+                throw new Exception(e.Message);
+            }
+
+            
 
             return httpResponse.IsSuccessStatusCode;
         }
