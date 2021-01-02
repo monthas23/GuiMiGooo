@@ -4,7 +4,7 @@
              Title="StarUp"
              x:Class="GuiMiGooo.Views.StartupView"             
              Shell.NavBarIsVisible="False"
-             BackgroundColor="Black">
+             BackgroundColor="MediumPurple">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
             <ActivityIndicator IsRunning="True" Color="LightGray"/>

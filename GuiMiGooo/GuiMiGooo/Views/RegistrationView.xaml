@@ -3,27 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Registration"
              x:Class="GuiMiGooo.Views.RegistrationView"
-             BackgroundColor="Black">
+             BackgroundColor="MediumPurple">
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
-            <Label Text="Username" FontSize="Medium" />
-            <Entry Text="{Binding Username, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Password" FontSize="Medium" />
-            <Editor Text="{Binding Password, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
-            <Label Text="Email" FontSize="Medium" />
-            <Entry Text="{Binding UserEmail, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Operateur" FontSize="Medium" />
-            <Entry Text="{Binding CompagnyCode, Mode=TwoWay}" FontSize="Medium" Placeholder="MTN, ORANGE o EXPRESSUNION"/>
-            <Label Text="Numero" FontSize="Medium" />
-            <Entry Text="{Binding PhoneNumber, Mode=TwoWay}" FontSize="Medium" Placeholder="MTN, ORANGE o EXPRESSUNION"/>
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Register" Command="{Binding RegisterCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <Label Text="Username" FontSize="Medium" TextColor="White" />
+            <Entry Text="{Binding Username, Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+            <Label Text="Password" FontSize="Medium" TextColor="White" />
+            <Editor Text="{Binding Password, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" TextColor="White"/>
+            <Label Text="Email" FontSize="Medium" TextColor="White" />
+            <Entry Text="{Binding UserEmail, Mode=TwoWay}" FontSize="Medium" TextColor="White" />
+            <Label Text="Operateur" FontSize="Medium" TextColor="White"/>
+            <Entry Text="{Binding CompagnyCode, Mode=TwoWay}" FontSize="Medium" Placeholder="MTN, ORANGE o EXPRESSUNION" TextColor="White"/>
+            <Label Text="Numero" FontSize="Medium" TextColor="White"/>
+            <Entry Text="{Binding PhoneNumber, Mode=TwoWay}" FontSize="Medium" Placeholder="MTN, ORANGE o EXPRESSUNION" TextColor="White"/>
+            <StackLayout Orientation="Horizontal" >
+                <Button Text="Register" Command="{Binding RegisterCommand}" HorizontalOptions="FillAndExpand" TextColor="White"></Button>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding RegistrationResult}"
                 VerticalOptions="EndAndExpand" 
-                HorizontalOptions="FillAndExpand" />
+                HorizontalOptions="FillAndExpand" TextColor="White"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
