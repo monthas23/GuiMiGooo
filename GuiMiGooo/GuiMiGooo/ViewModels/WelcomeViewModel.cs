@@ -42,8 +42,8 @@ namespace GuiMiGooo.ViewModels
 
                 OutputText = e.Message;
             }
-
-            OutputText = await response.Content.ReadAsStringAsync(); ;
+            if(response.IsSuccessStatusCode)
+                OutputText = await response.Content.ReadAsStringAsync(); ;
 
         }
 

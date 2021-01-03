@@ -32,6 +32,17 @@
                        Glyph="&#xf05a;"
                        Size="22" Color="Black"/>
 
+
+            <FontImage x:Key="ContactsIcon"
+                       FontFamily="{StaticResource IconFont}"
+                       Glyph="&#xf2bb;"
+                       Size="22" Color="Black"/>
+
+            <FontImage x:Key="ProfileIcon"
+                       FontFamily="{StaticResource IconFont}"
+                       Glyph="&#xf2bd;"
+                       Size="22" Color="Black"/>
+
         </ResourceDictionary>
 
     </Application.Resources>

@@ -12,7 +12,30 @@
     <FlyoutItem Route="WelcomeView" IsVisible="False" Icon="{StaticResource HomeIcon}">
         <ShellContent  Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate views:WelcomeView}" />
     </FlyoutItem>
-<!--
+
+    <!-- After logging -->
+    <FlyoutItem Route="HomeView" Title="Home" Icon="{StaticResource HomeIcon}">
+
+        <ShellContent Title="Home" Icon="{StaticResource HomeIcon}" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate views:HomeView}">
+            <ContentPage Title="Home GuiMiGomma"/>
+        </ShellContent>
+
+        <Tab Title="Profile" Icon="{StaticResource ProfileIcon}" Route="Profile">
+            <ShellContent Title="Contacts" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate views:ProfileView}"/>
+        </Tab>
+        
+        <Tab Title="Contacts" Icon="{StaticResource ContactsIcon}" Route="Contacts">
+            <ShellContent Title="Contacts" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate views:ContactsView}"/>
+        </Tab>
+        <Tab Title="Settings" Icon="{StaticResource SettingsIcon}" Route="Settings">
+            <ShellContent Title="Settings" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate views:SettingsView}"/>
+            <!--ContentPage Title="Settings"/-->
+        </Tab>
+        
+    </FlyoutItem>
+    
+    
+    <!--
     <FlyoutItem Route="LoginView" IsVisible="True" Icon="{StaticResource HomeIcon}">
         <ShellContent  Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate views:LoginView}" />
     </FlyoutItem>

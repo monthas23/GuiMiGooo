@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GuiMiGooo.Views.ContactsView"
+             Title="Contacts"
+             BackgroundColor="MediumPurple">>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame  
+                BackgroundColor="MediumVioletRed"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"  >
+                <Label Text="Vos contacts" FontSize="Title" TextColor="Black"/>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

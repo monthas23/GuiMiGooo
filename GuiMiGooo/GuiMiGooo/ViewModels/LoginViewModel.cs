@@ -1,10 +1,12 @@
 ﻿using GuiMiGooo.Services;
 using GuiMiGooo.Views;
+using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GuiMiGooo.ViewModels
@@ -16,6 +18,13 @@ namespace GuiMiGooo.ViewModels
 
         public string OutputText { get; set; }
 
+        public bool RememberMe
+        {
+            get => Preferences.Get(nameof(RememberMe), false);
+
+            set => Preferences.Set(nameof(RememberMe), value);
+            
+        }
         private readonly GuiMiGoommaServices utilServices;
 
         public Command SaveCommand { get; private set; }
@@ -30,10 +39,11 @@ namespace GuiMiGooo.ViewModels
 
         private async void SaveCommandClicked(object obj)
         {
+            UserInfoResponse resp = new UserInfoResponse();
             try
             {
 
-                var resp = await utilServices.GetUserInfo(Username, Password);
+                resp = await utilServices.GetUserInfo(Username, Password, RememberMe);
 
 
                 var sb = new StringBuilder(128);
@@ -51,6 +61,10 @@ namespace GuiMiGooo.ViewModels
                 OutputText = e.Message;
 
             }
+
+            if (resp != null && resp.HttpResponse != null && resp.HttpResponse.IsSuccessStatusCode)
+                //await Navigation.NavigateTo(nameof(HomeView));
+                await Navigation.NavigateTo($"//{nameof(HomeView)}");
 
         }
 

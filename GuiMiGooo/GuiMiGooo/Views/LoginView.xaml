@@ -3,21 +3,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Login"
              x:Class="GuiMiGooo.Views.LoginView"
-             BackgroundColor="MediumPurple">
-
+             BackgroundColor="MediumPurple"
+             Shell.NavBarIsVisible="True">
     <ContentPage.Content>
+        
         <StackLayout Spacing="3" Padding="15">
-            <Label Text="Username" FontSize="Medium" TextColor="White"/>
-            <Entry Text="{Binding Username, Mode=TwoWay}" FontSize="Medium" TextColor="White" />
-            <Label Text="Password" FontSize="Medium" TextColor="White"/>
-            <Editor Text="{Binding Password, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" TextColor="White"/>
-            <StackLayout Orientation="Horizontal" >
+            <Frame BackgroundColor="MediumVioletRed">
+                <Label Text="Welcome to GuiMiGomma!" HorizontalTextAlignment="Center" FontSize="Title" TextColor="White"/>
+            </Frame>
+            <Label Text="Username"
+                   FontSize="Medium"
+                   TextColor="White"/>
+            
+            <Entry Text="{Binding Username}"
+                   FontSize="Medium"
+                   TextColor="White" />
+            
+            <Label Text="Password"
+                   FontSize="Medium"
+                   TextColor="White"/>
+            
+            
+            <Entry Text="{Binding Password}"
+                    FontSize="Medium"
+                    Margin="0" TextColor="White" IsPassword="True"/>
+            <!--StackLayout Orientation="Horizontal" Margin="0,0" >
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Login" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout-->
+            <!--StackLayout>
+                <Label Text="Souviens toi 2 moi :" IsVisible="True"  FontSize="Medium" TextColor="White"/>
+                <Switch IsToggled="{Binding RememberMe}"/>
+            </StackLayout-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Padding="15,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width=".2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Button Text="Cancel"
+                            Command="{Binding CancelCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            Grid.Row="0"
+                            Grid.Column="1"/-->
+
+                    <Button Text="Login"
+                            Command="{Binding SaveCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"/>
+
+                    <Label Text="Souvenez vous toi 2 moi :"
+                           IsVisible="True"
+                           FontSize="Medium"
+                           TextColor="White"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           VerticalTextAlignment="Center"/>
+
+                    <Switch IsToggled="{Binding RememberMe}"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalOptions="Center"/>
+                </Grid>
+            </Grid>
+            <Label  Text="{Binding OutputText}"
+                            VerticalOptions="EndAndExpand" 
+                            HorizontalOptions="FillAndExpand" TextColor="White" />
             </StackLayout>
-            <Label Text="{Binding OutputText}"
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="FillAndExpand" TextColor="White" />
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

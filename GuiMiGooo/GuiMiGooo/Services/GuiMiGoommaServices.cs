@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 
 namespace GuiMiGooo.Services
 {
@@ -109,12 +109,15 @@ namespace GuiMiGooo.Services
                 throw new Exception(e.Message);
             }
 
-            
+
 
             return httpResponse.IsSuccessStatusCode;
         }
-        public async Task<TokenResponse> GetAccessToken(string Username = "sdss", string Password = "pipPssdsdo@12020")
+        public async Task<string> GetAccessToken(bool rememberData, string Username = "sdss", string Password = "pipPssdsdo@12020")
         {
+            if (!String.IsNullOrEmpty(Preferences.Get($"CurrentToken_{Username}", string.Empty)) && rememberData)
+                return Preferences.Get($"CurrentToken_{Username}", string.Empty);
+
             TokenResponse tokenResponse = new TokenResponse();
 
             try
@@ -130,6 +133,10 @@ namespace GuiMiGooo.Services
                     Password = Password,
 
                 });
+
+                if (rememberData)
+                    Preferences.Set($"CurrentToken_{Username}", tokenResponse.AccessToken);
+
             }
             catch (Exception e)
             {
@@ -137,23 +144,23 @@ namespace GuiMiGooo.Services
                 throw new Exception($"Unable to get Accesst token with : {Username}", tokenResponse.Exception);
             }
 
-            return tokenResponse;
+            return tokenResponse.AccessToken;
         }
 
         //public async Task<UserInfoResponseGuimiGomma> GetUserInfo(string Username = "sdss", string Password = "pipPssdsdo@12020")
-        public async Task<UserInfoResponse> GetUserInfo(string Username = "sdss", string Password = "pipPssdsdo@12020")
+        public async Task<UserInfoResponse> GetUserInfo(string Username = "sdss", string Password = "pipPssdsdo@12020", bool rememberData = false)
         {
 
             UserInfoResponse userInfoResult = new UserInfoResponse();
 
-            var tk = await GetAccessToken(Username, Password);
+            string CurrentToken = await GetAccessToken(rememberData, Username, Password);
 
             try
             {
                 userInfoResult = await _client.GetUserInfoAsync(new UserInfoRequest
                 {
                     Address = Settings.UserinfoEndpoint,
-                    Token = tk.AccessToken
+                    Token = CurrentToken
 
                 });
             }
@@ -165,11 +172,11 @@ namespace GuiMiGooo.Services
                 //UserInfoResponseGuimiGomma UserInfError = new UserInfoResponseGuimiGomma() {
                 //    ErrorMessageGG =  e.Message,
                 //    ActualRespGG = userInfoResult.ActualRespGG
-                    
+
                 //};
                 //return UserInfError;
 
-                throw new Exception( e.Message);
+                throw new Exception(e.Message);
             }
 
 
