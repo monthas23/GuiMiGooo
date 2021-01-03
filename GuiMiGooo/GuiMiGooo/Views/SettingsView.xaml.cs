@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuiMiGooo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,14 @@ namespace GuiMiGooo.Views
         public SettingsView()
         {
             InitializeComponent();
+            Task.Run(async () => await Initialize());
+        }
+
+        private async Task Initialize()
+        {
+            var viewModel = MyResolver.Resolve<SettingsViewModel>();
+            BindingContext = viewModel;
+            await viewModel.Initialize();
         }
     }
 }
