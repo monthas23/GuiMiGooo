@@ -3,30 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Login"
              x:Class="GuiMiGooo.Views.LoginView"
-             BackgroundColor="MediumPurple"
+             BackgroundColor="#292C34"
              Shell.NavBarIsVisible="True">
     <ContentPage.Content>
         
-        <StackLayout Spacing="3" Padding="15">
-            <Frame BackgroundColor="MediumVioletRed">
+        <StackLayout Spacing="6" Padding="20" VerticalOptions="CenterAndExpand">
+            <!--Frame BackgroundColor="Transparent">
                 <Label Text="Welcome to GuiMiGomma!" HorizontalTextAlignment="Center" FontSize="Title" TextColor="White"/>
-            </Frame>
-            <Label Text="Username"
+            </Frame-->
+
+            <Grid BackgroundColor="#222B5A">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Padding="15,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Username"
                    FontSize="Medium"
-                   TextColor="White"/>
-            
-            <Entry Text="{Binding Username}"
+                   TextColor="White"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2"/>
+
+                    <Entry Text="{Binding Username}"
                    FontSize="Medium"
-                   TextColor="White" />
-            
-            <Label Text="Password"
+                   TextColor="White"
+                           Grid.Row="1"
+                            Grid.ColumnSpan="2"/>
+
+                    <Label Text="Password"
                    FontSize="Medium"
-                   TextColor="White"/>
-            
-            
-            <Entry Text="{Binding Password}"
+                   TextColor="White"
+                           Grid.Row="2"
+                            Grid.ColumnSpan="2"/>
+
+
+                    <Entry Text="{Binding Password}"
                     FontSize="Medium"
-                    Margin="0" TextColor="White" IsPassword="True"/>
+                    Margin="0" TextColor="White" IsPassword="True"
+                           Grid.Row="3"
+                            Grid.ColumnSpan="2"/>
+
+                </Grid>
+            </Grid>
+
+
+            
             <!--StackLayout Orientation="Horizontal" Margin="0,0" >
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Login" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>

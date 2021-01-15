@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuiMiGooo.Views.SettingsView"
              Title="Settings"
-             BackgroundColor="MediumPurple">
+             BackgroundColor="#292C34">
     <ContentPage.Content>
         <StackLayout>
             <Frame  
-                BackgroundColor="MediumVioletRed"
+                BackgroundColor="#292C34"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"  >
                 <Label Text="Settings!" FontSize="Title" TextColor="Black"/>

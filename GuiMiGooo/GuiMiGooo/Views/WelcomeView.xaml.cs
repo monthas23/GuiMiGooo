@@ -15,14 +15,16 @@ namespace GuiMiGooo.Views
     {
         public WelcomeView()
         {
-            InitializeComponent();
+            InitializeComponent();            
             Task.Run(async () => await Initialize());
+            //NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async Task Initialize(string argEventual = null)
         {
             var viewModel = MyResolver.Resolve<WelcomeViewModel>();
-            BindingContext = viewModel;            
+            BindingContext = viewModel;
+            Login.Clicked += viewModel.Login_Clicked;
             await viewModel.Initialize();
         }
     }

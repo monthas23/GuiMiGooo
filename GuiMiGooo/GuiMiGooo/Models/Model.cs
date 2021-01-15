@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 
 namespace GuiMiGooo.Models
 {
@@ -38,5 +39,20 @@ namespace GuiMiGooo.Models
         public bool email_verified { get; set; }
         public string phoneNumber { get; set; }
         public string userId { get; set; }
+    }
+
+
+    public class UserContact
+    {
+        public int Id { get; set; }
+        public string NamePrefix { get; set; }
+        public string GivenName { get; set; }
+        public string MiddleName { get; set; }
+        public string FamilyName { get; set; }
+
+        public string NameSuffix { get; set; }
+        public bool DisplayName { get; set; }
+        public List<ContactPhone> Phones { get; set; }
+        public List<ContactEmail> Emails { get; set; }
     }
 }

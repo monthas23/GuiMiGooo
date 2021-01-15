@@ -3,15 +3,100 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuiMiGooo.Views.ContactsView"
              Title="Contacts"
-             BackgroundColor="MediumPurple">
+             x:Name="_ContactsView"
+             xmlns:views ="clr-namespace:GuiMiGooo.Views"
+             BackgroundColor="#292434">
     <ContentPage.Content>
         <StackLayout>
-            <Frame  
-                BackgroundColor="MediumVioletRed"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"  >
-                <Label Text="Vos contacts" FontSize="Title" TextColor="Black"/>
-            </Frame>
+            <CollectionView>
+                <CollectionView.EmptyView>
+                    <Label Text="Loading..." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                            <ContentView>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Padding="15,20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width=".2*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Text="Login"
+                                    Command="{Binding RetrieveContacts}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"/>
+                                    </Grid>
+                                </Grid>
+                            </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <CollectionView ItemsSource="{Binding UserContacts}">
+                <CollectionView.EmptyView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Padding="15,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width=".2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Text="Login"
+                            Command="{Binding RetrieveContacts}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </Grid>
+                    <!--Label Text="Loading..." /-->
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.ItemSelected,
+                                    Source={x:Reference _ContactsView}}"
+                                    CommandParameter="{Binding .}"/>
+                            </ContentView.GestureRecognizers>
+                            <views:ContactItem/>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Padding="15,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Login"
+                            Command="{Binding RetrieveContacts}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"/>
+            </Grid>
+        </Grid-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

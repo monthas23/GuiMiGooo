@@ -1,12 +1,15 @@
 ﻿using GuiMiGooo.Models;
 using IdentityModel.Client;
+using IdentityModel.OidcClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -24,6 +27,10 @@ namespace GuiMiGooo.Services
         private readonly IOptions<IdentityServerSettings> _identityServerSettings;
         private readonly DiscoveryDocumentResponse _discoveryDocument;
         private readonly HttpClient _client;
+
+        OidcClient ClientOidc { get; set; }
+        LoginResult LoginResult { get; set; }
+        Lazy<HttpClient> _apiClient = new Lazy<HttpClient>(() => new HttpClient());
 
         public GuiMiGoommaServices()
         {
@@ -85,6 +92,39 @@ namespace GuiMiGooo.Services
 
             return tokenResponse;
         }
+
+        internal async Task<ObservableCollection<Contact>> GetContacts()
+        {
+
+            ObservableCollection<Contact> contactsCollect = new ObservableCollection<Contact>();
+            try
+            {
+                Contact pickedContact = new Contact();
+
+                pickedContact = await Contacts.PickContactAsync();
+                int count = 0;
+                var cancellationToken = default(CancellationToken);
+                var allContacts = await Contacts.GetAllAsync(cancellationToken);
+
+                foreach (var contact in allContacts) {
+                    count++;
+                    contactsCollect.Add(contact);
+
+                    if (count == 50)
+                        break;                    
+                    
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+            
+
+            return contactsCollect;
+        }
+
         public async Task<bool> UserRegistration(string Username, string Password, string Email, List<CompagniesData> Operatori = null)
         {
             //var client = new HttpClient();

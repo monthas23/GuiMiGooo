@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuiMiGooo.Views.HomeView"
              Title="Home"
-             BackgroundColor="MediumPurple">
+             BackgroundColor="#292C34">
     <ContentPage.Content>
         <StackLayout>
             <Frame  
-                BackgroundColor="MediumVioletRed"
+                BackgroundColor="Transparent"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"  >
-                <Label Text="Home GuiMiGomma!" FontSize="Title" TextColor="Black"/>
+                <Label Text="Home GuiMiGomma!" FontSize="Title" TextColor="White"/>
             </Frame>
+            <Label Text="{Binding OutputText}"
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

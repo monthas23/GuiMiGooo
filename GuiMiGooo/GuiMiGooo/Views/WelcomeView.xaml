@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Welcome 2 GuiMiGomma!!"
              x:Class="GuiMiGooo.Views.WelcomeView"
-             BackgroundColor="MediumPurple">
+             BackgroundColor="#292C34">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center" >
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
             <Button VerticalOptions="Center" Text="Nouveau?" Command="{Binding RegisterCommand}"/>
             <Button VerticalOptions="Center" Text="Token" Command="{Binding TokenCommand}"/>
+            <Button VerticalOptions="Center" Text="Browser Login" Command="{Binding BrowseLoginCommand}"/>
+            <Button Text="Login Monthas Ids4" x:Name="Login" Padding="20" />
             <Label Text="{Binding OutputText}"
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="FillAndExpand" />

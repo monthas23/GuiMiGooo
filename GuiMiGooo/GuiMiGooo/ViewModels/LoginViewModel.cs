@@ -1,9 +1,12 @@
 ﻿using GuiMiGooo.Services;
 using GuiMiGooo.Views;
 using IdentityModel.Client;
+using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -17,6 +20,7 @@ namespace GuiMiGooo.ViewModels
         public string Password { get; set; }
 
         public string OutputText { get; set; }
+        
 
         public bool RememberMe
         {
@@ -25,7 +29,6 @@ namespace GuiMiGooo.ViewModels
             set => Preferences.Set(nameof(RememberMe), value);
             
         }
-        private readonly GuiMiGoommaServices utilServices;
 
         public Command SaveCommand { get; private set; }
 
@@ -37,6 +40,7 @@ namespace GuiMiGooo.ViewModels
 
         }
 
+        
         private async void SaveCommandClicked(object obj)
         {
             UserInfoResponse resp = new UserInfoResponse();
