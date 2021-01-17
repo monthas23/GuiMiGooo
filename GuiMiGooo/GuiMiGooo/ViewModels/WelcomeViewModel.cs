@@ -94,9 +94,9 @@ namespace GuiMiGooo.ViewModels
                 OutputText = sb.ToString();
 
                 _apiClient.Value.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _result?.AccessToken ?? "");
-                //await Navigation.NavigateTo($"//{nameof(HomeView)}");
-                await Navigation.NavigateTo($"//{nameof(WelcomeView)}");
-                return;
+                await Navigation.NavigateTo($"//{nameof(HomeView)}");
+                //await Navigation.NavigateTo($"//{nameof(WelcomeView)}");
+                ///return;
             }
         }
 
@@ -107,7 +107,7 @@ namespace GuiMiGooo.ViewModels
 
             var options = new OidcClientOptions
             {
-                //Authority = "http://monthas.northeurope.cloudapp.azure.com",
+                //Authority = "https://monthas.northeurope.cloudapp.azure.com",
                 Authority = "https://monthasbjridserver.azurewebsites.net",
                 ClientId = "xamarin",
                 //ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".ToSha256(),
@@ -119,7 +119,7 @@ namespace GuiMiGooo.ViewModels
 
 
 
-                //BackchannelHandler = new HttpClientHandler() { ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true },
+                BackchannelHandler = new HttpClientHandler() { ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true },
                 //Policy = new Policy()
                 //{
                 //    Discovery = new DiscoveryPolicy() { RequireHttps = false }
@@ -130,6 +130,7 @@ namespace GuiMiGooo.ViewModels
             _client = new OidcClient(options);
 
             _apiClient.Value.BaseAddress = new Uri("https://monthasbjridserver.azurewebsites.net/");
+            //_apiClient.Value.BaseAddress = new Uri("https://monthas.northeurope.cloudapp.azure.com/");
         }
 
 

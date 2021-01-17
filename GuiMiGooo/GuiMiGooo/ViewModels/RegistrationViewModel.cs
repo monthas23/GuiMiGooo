@@ -24,7 +24,33 @@ namespace GuiMiGooo.ViewModels
         public RegistrationViewModel(GuiMiGoommaServices utilServices)
         {
             this.utilServices = utilServices;
-            RegisterCommand = new Command(RegisterCommandClicked);
+            //RegisterCommand = new Command(RegisterCommandClicked);
+            RegisterCommand = new Command(RegisterCommandClicked2);
+        }
+
+
+        private async void RegisterCommandClicked2(object obj)
+        {
+            //Validate();
+            try
+            {   
+
+                if (await utilServices.UserRegistration2(Username, Password, UserEmail,PhoneNumber))
+                {
+                    RegistrationResult = $"Mr/Mrs {Username} à été correctement Enregistré sur GuiMiGomma";
+                    Username = string.Empty;
+                    UserEmail = string.Empty;
+                    Password = string.Empty;
+                    PhoneNumber = string.Empty;
+                    CompagnyCode = string.Empty;
+                }
+
+            }
+            catch (Exception e)
+            {
+                RegistrationResult = e.Message;
+            }
+
         }
 
         private async void RegisterCommandClicked(object obj)

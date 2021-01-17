@@ -4,6 +4,9 @@
              x:Class="GuiMiGooo.Views.HomeView"
              Title="Home"
              BackgroundColor="#292C34">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Frame  

@@ -17,7 +17,8 @@ namespace GuiMiGooo.ViewModels
         public ContactsViewModel(GuiMiGoommaServices utilServices)
         {
             this.utilServices = utilServices;
-            RetrieveContacts = new Command(RetrieveContactsCommandClicked);
+            Initialize();
+            //RetrieveContacts = new Command(RetrieveContactsCommandClicked);
         }
 
         private async void RetrieveContactsCommandClicked(object obj)
@@ -30,9 +31,13 @@ namespace GuiMiGooo.ViewModels
             var cancellationToken = default(CancellationToken);
             var allContacts = await Contacts.GetAllAsync(cancellationToken);
 
-            foreach (var contact in allContacts)
+            int i = 0;
+            foreach (var contact in allContacts) { 
                 contactsCollect.Add(contact);
 
+                if (i == 25)
+                    break;
+            }
             var id = pickedContact.Id;
             var namePrefix = pickedContact.NamePrefix;
             var givenName = pickedContact.GivenName;

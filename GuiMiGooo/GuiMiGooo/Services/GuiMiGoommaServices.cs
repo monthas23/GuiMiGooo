@@ -99,6 +99,18 @@ namespace GuiMiGooo.Services
             ObservableCollection<Contact> contactsCollect = new ObservableCollection<Contact>();
             try
             {
+                HttpResponseMessage httpResponse = new HttpResponseMessage();
+
+                try
+                {
+                    httpResponse = await _client.GetAsync(new Uri(Settings.AllUsersinfoEndpoint2));
+                }
+                catch (Exception e)
+                {
+
+                    throw new Exception(e.Message);
+                }
+                /*
                 Contact pickedContact = new Contact();
 
                 pickedContact = await Contacts.PickContactAsync();
@@ -113,7 +125,7 @@ namespace GuiMiGooo.Services
                     if (count == 50)
                         break;                    
                     
-                }
+                }*/
             }
             catch (Exception e)
             {
@@ -123,6 +135,36 @@ namespace GuiMiGooo.Services
             
 
             return contactsCollect;
+        }
+
+
+        public async Task<bool> UserRegistration2(string Username, string Password, string Email, string ph)
+        {
+            //var client = new HttpClient();
+
+            var model = new RequestEnregistrement()
+            {
+                UserEmail = Email,
+                Password = Password,
+                UserName = Username,
+                PhoneNumber = ph
+            };
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            try
+            {
+                httpResponse = await _client.PostAsync(new Uri(Settings.RegistrationEndpoint2), content);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
+
+
+            return httpResponse.IsSuccessStatusCode;
         }
 
         public async Task<bool> UserRegistration(string Username, string Password, string Email, List<CompagniesData> Operatori = null)

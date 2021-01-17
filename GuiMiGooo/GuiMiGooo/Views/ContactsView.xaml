@@ -8,7 +8,7 @@
              BackgroundColor="#292434">
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView>
+            <!--CollectionView>
                 <CollectionView.EmptyView>
                     <Label Text="Loading..." />
                 </CollectionView.EmptyView>
@@ -38,10 +38,11 @@
                             </ContentView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView-->
             <CollectionView ItemsSource="{Binding UserContacts}">
                 <CollectionView.EmptyView>
-                    <Grid>
+                    <Label Text="Loading..." />
+                    <!--Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
@@ -60,7 +61,7 @@
                             Grid.Row="0"
                             Grid.ColumnSpan="2"/>
                         </Grid>
-                    </Grid>
+                    </Grid-->
                     <!--Label Text="Loading..." /-->
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>

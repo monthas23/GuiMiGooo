@@ -24,7 +24,7 @@ namespace GuiMiGooo.Views
         {
             var viewModel = MyResolver.Resolve<WelcomeViewModel>();
             BindingContext = viewModel;
-            Login.Clicked += viewModel.Login_Clicked;
+            //Login.Clicked += viewModel.Login_Clicked;
             await viewModel.Initialize();
         }
     }

@@ -7,7 +7,13 @@ namespace GuiMiGooo
     public static class Settings
     {
 
-
+        public static string RegistrationEndpoint2
+        {
+            get
+            {
+                return "https://monthasbjridserver.azurewebsites.net/api/GuiMiGoooServices/Enregistrement";
+            }
+        }
         public static string RegistrationEndpoint
         {
             get
@@ -20,6 +26,21 @@ namespace GuiMiGooo
             get
             {
                 return "http://monthas.northeurope.cloudapp.azure.com:8023/api/Register/GetAllUsers";
+            }
+        }
+
+        public static string AllUsersinfoEndpoint2
+        {
+            get
+            {
+                return "https://monthasbjridserver.azurewebsites.net/api/GuiMiGoooServices/GetAllUsers";
+            }
+        }
+        public static string UserinfoEndpoint2
+        {
+            get
+            {
+                return "https://monthasbjridserver.azurewebsites.net/connect/userinfo";
             }
         }
         public static string UserinfoEndpoint
