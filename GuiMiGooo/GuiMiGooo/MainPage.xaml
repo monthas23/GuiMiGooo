@@ -9,5 +9,9 @@
         <Label x:Name="OutputText"
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="FillAndExpand" />
+        <Label x:Name="OutputTextJenPierre"
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="FillAndExpand"
+               Text="Contribution Jean Pierre Deffo Fotso"/>
     </StackLayout>
 </ContentPage>

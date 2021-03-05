@@ -17,6 +17,11 @@ namespace GuiMiGooo
         public MainPage()
         {
             InitializeComponent();
+            List<string> provaList = new List<string>();
+            for (int i = 0; i < provaList.Count; i++)
+            {
+
+            }
         }
     }
 }
